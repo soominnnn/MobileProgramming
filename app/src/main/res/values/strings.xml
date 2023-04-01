@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Mobile_20230330_20211916신수민</string>
+    <string name="descriptionP1">P1</string>
+    <string name="descriptionP2">P2</string>
+    <string name="gameStart">Game Start</string>
+    <string name="Result">WHO IS WINNER ?</string>
+    <string name="ResultWin">Player1 승률</string>
+    <string name="ResultWin2">Player2 승률</string>
+    <string name="PlayNum">총 플레이 횟수</string>
+    <string name="Count">0</string>
+</resources>
