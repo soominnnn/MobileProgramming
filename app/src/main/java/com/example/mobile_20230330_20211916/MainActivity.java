@@ -8,6 +8,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+
+import java.text.DecimalFormat;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,8 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
     int numP1 = 0;
     int numP2 = 0;
-    String Sum_string = "0";
-    String Sum_string2 = "0";
+    long Sum_string = 0;
+    long Sum_string2 = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +64,32 @@ public class MainActivity extends AppCompatActivity {
                 numP2 = random.nextInt(3);
 
                 Count ++;
+
                 //Count를 통해 textViewResult3에 횟수 보이기
                 textViewResult3.setText("총 플레이 횟수 : "+Count);
 
-
+                //Count가 10 이상, Player 1의 승률이 60 이하인 경우 loop
+                while (Count >=10 && Sum_string <= 60){
+                    if(numP2 == 0){
+                        numP1 = 2;
+                        textViewResult2.setText(String.valueOf(Sum_string) + "%");
+                        textViewResult4.setText(String.valueOf(Sum_string2) + "%");
+                        break;
+                    }
+                    else if(numP2 == 1){
+                        numP1 = 0;
+                        textViewResult2.setText(String.valueOf(Sum_string) + "%");
+                        textViewResult4.setText(String.valueOf(Sum_string2) + "%");
+                        break;
+                    }
+                    else {
+                        numP1 = 1;
+                        textViewResult2.setText(String.valueOf(Sum_string) + "%");
+                        textViewResult4.setText(String.valueOf(Sum_string2) + "%");
+                        break;
+                    }
+                }
+                //이미지 뷰 처리
                 if(numP1 == 0){
                     imageViewP1.setImageDrawable(getResources().getDrawable(R.drawable.rock,null));
                 }
@@ -81,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else{imageViewP2.setImageDrawable(getResources().getDrawable(R.drawable.paper,null));}
 
+                //승부 판정
                 if(numP1 == numP2){
                     textViewResult.setText("무승부");
                     win_gif_img.setVisibility(View.INVISIBLE);
@@ -104,24 +130,17 @@ public class MainActivity extends AppCompatActivity {
                     win_gif_img_2.setVisibility(View.INVISIBLE);
                     lose_gif_img.setVisibility(View.INVISIBLE);
                 }
+
                 //Count가 10의 배수일때마다 승률 출력
                 if(Count%10 == 0) {
                     double Sum = (((float) WinP1 / Count) * 100);
-                    Sum_string = String.format("%.1f", Sum);
-                    textViewResult2.setText(Sum_string + "%");
+                    Sum_string = Math.round(Sum);
+                    textViewResult2.setText(String.valueOf(Sum_string) + "%");
                     double Sum2 = (((float) WinP2 / Count) * 100);
-                    Sum_string2 = String.format("%.1f", Sum2);
-                    textViewResult4.setText(Sum_string2 + "%");
+                    Sum_string2 = Math.round(Sum2);
+                    textViewResult4.setText(String.valueOf(Sum_string2) + "%");
                 }
-                if(Count >= 10||!Sum_string.equals("60")){
-                    if(numP2 == 0){
-                        numP1 = 2;
-                    }
-                    else if(numP2 == 1){
-                        numP1 = 0;
-                    }
-                    else{numP1 = 1;}
-                }
+
             }
         });
     }
