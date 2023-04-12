@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import java.util.Random;
 
-//논리 런타임 :객체 생성 x 구문오류 로직오류  시험문제
 public class MainActivity extends AppCompatActivity {
 
     ImageView ImageViewP1Num1,ImageViewP1Num2,ImageViewP2Num1, ImageViewP2Num2;
